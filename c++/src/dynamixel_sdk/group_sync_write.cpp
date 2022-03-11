@@ -97,15 +97,16 @@ bool GroupSyncWrite::addParam(uint8_t id, uint8_t* data, uint16_t length)
     data_list_[id][2] = data[1];
     data_list_[id][3] = data[0];
   }
-  else if (length == 6) // Hack as this function not yet suppport addending data. Why use indirect mode if this is not possible?
+  else if (length == 7) // Hack as this function not yet suppport addending data. Why use indirect mode if this is not possible?
   {
     // Little Endian conversion
-    data_list_[id][0] = data[3];
-    data_list_[id][1] = data[2];
-    data_list_[id][2] = data[1];
-    data_list_[id][3] = data[0];
-    data_list_[id][4] = data[5];
-    data_list_[id][5] = data[4];
+    data_list_[id][0] = data[0];
+    data_list_[id][1] = data[4];
+    data_list_[id][2] = data[3];
+    data_list_[id][3] = data[2];
+    data_list_[id][4] = data[1];
+    data_list_[id][5] = data[6];
+    data_list_[id][6] = data[5];
   }
   else if (length == 2) {
     data_list_[id][0] = data[1];
