@@ -38,7 +38,7 @@
 
 #include "port_handler_mac.h"
 
-#define LATENCY_TIMER   1  // msec (USB latency timer)
+#define LATENCY_TIMER   16  // msec (USB latency timer)
                             // You should adjust the latency timer value.
                             // When you are going to use sync / bulk read, the latency timer should be loosen.
                             // the lower latency timer value, the faster communication speed.
