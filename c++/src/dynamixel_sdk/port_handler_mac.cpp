@@ -298,7 +298,22 @@ bool PortHandlerMac::setCustomBaudrate(int speed)
 
 	cfmakeraw(&options); // necessary for ioctl to function; must come after setattr
 	const speed_t TGTBAUD = speed;
-	int ret = ioctl(socket_fd_, IOSSIOSPEED, &TGTBAUD); // sets also non-standard baud rates
+	//int ret = ioctl(socket_fd_, IOSSIOSPEED, &TGTBAUD); // sets also non-standard baud rates
+
+  // Set baud rate  
+  if ( -1 == ioctl(socket_fd_, IOSSIOSPEED, &TGTBAUD)){
+    fprintf(stderr, "\nError calling ioctl(..., IOSSDATALAT, ...)\n");
+    return(-1);
+  }
+
+  // Setting latency on apple driver.
+  unsigned long microseconds = 2ULL; // 2ms
+  if ( -1 == ioctl(socket_fd_, IOSSDATALAT, &microseconds) ) {
+    // set latency
+    fprintf(stderr, "\nError calling ioctl(..., IOSSDATALAT, ...)\n");
+    return(-1);
+  }
+
 
 
   return true;
